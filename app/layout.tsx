@@ -14,16 +14,19 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://keisan-tools-zeta.vercel.app"),
-  title: {
-    default: "計算ツール集",
-    template: "%s | 計算ツール集",
-  },
   icons: {
     icon: "/favicon.ico",
     apple: "/icon.png",
   },
+  title: {
+    default: "計算ツール集",
+    template: "%s | 計算ツール集",
+  },
   description:
     "時給計算、年収計算、残業代計算など仕事や生活に役立つ計算ツールを無料で利用できます。",
+  verification: {
+    google: "iyfgbgeSNY-fbd6FvVklVswnhOZyC0xG-ot9I-naMZ8",
+  },
   openGraph: {
     title: "計算ツール集",
     description:
