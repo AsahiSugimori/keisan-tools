@@ -52,6 +52,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <head>
+        <meta
+          name="google-site-verification"
+          content="iyfgbgeSNY-fbd6FvVklVswnhOZyC0xG-ot9I-naMZ8"
+        />
+      </head>
       <body>
         <header className="border-b bg-white shadow-sm">
           <div className="mx-auto max-w-5xl px-4 py-4">
