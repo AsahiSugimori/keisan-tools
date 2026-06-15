@@ -19,8 +19,8 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
   title: {
-    default: "計算ツール集",
-    template: "%s | 計算ツール集",
+    default: "サクミル",
+    template: "%s",
   },
   description:
     "時給計算、年収計算、残業代計算など仕事や生活に役立つ計算ツールを無料で利用できます。",
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     google: "iyfgbgeSNY-fbd6FvVklVswnhOZyC0xG-ot9I-naMZ8",
   },
   openGraph: {
-    title: "計算ツール集",
+    title: "サクミル",
     description:
       "時給計算、年収計算、残業代計算など仕事や生活に役立つ計算ツールを無料で利用できます。",
-    siteName: "計算ツール集",
+    siteName: "サクミル",
     locale: "ja_JP",
     type: "website",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "/ogp.png",
         width: 1200,
         height: 630,
-        alt: "計算ツール集のOGP画像",
+        alt: "サクミルのOGP画像",
       },
     ],
   },
@@ -62,7 +62,7 @@ export default function RootLayout({
         <header className="border-b bg-white shadow-sm">
           <div className="mx-auto max-w-5xl px-4 py-4">
             <a href="/" className="text-xl font-bold hover:text-blue-600">
-              計算ツール集
+              サクミル
             </a>
           </div>
         </header>
@@ -82,7 +82,7 @@ export default function RootLayout({
                 お問い合わせ
               </a>
             </div>
-            <p>© 2026 計算ツール集</p>
+            <p>© 2026 サクミル</p>
           </div>
         </footer>
       </body>
