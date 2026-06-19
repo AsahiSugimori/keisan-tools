@@ -44,6 +44,11 @@ type DependentWorkLimitResult = {
 };
 
 /**
+ * 時給別の目安表示用データ
+ */
+const exampleHourlyWages = [1100, 1200, 1300, 1500];
+
+/**
  * 金額・時間を0以上に丸める
  *
  * @param value 数値
@@ -363,6 +368,26 @@ export default function DependentWorkLimitCalculator() {
     customAnnualLimit,
     includeTransportationCost
   );
+  /** 時給別の目安 */
+  const exampleResults = exampleHourlyWages.map((exampleHourlyWage) => ({
+    hourlyWage: exampleHourlyWage,
+    limit103: calculateDependentWorkLimit(
+      exampleHourlyWage,
+      minValue,
+      defaultWorkingDaysPerWeek,
+      "limit103",
+      defaultCustomAnnualLimit,
+      false
+    ),
+    limit130: calculateDependentWorkLimit(
+      exampleHourlyWage,
+      minValue,
+      defaultWorkingDaysPerWeek,
+      "limit130",
+      defaultCustomAnnualLimit,
+      false
+    ),
+  }));
 
   return (
     <main className="mx-auto max-w-3xl p-4">
@@ -474,105 +499,254 @@ export default function DependentWorkLimitCalculator() {
             計算結果
           </h2>
 
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span>年収上限</span>
-              <span>{result.annualLimit.toLocaleString()}円</span>
+            <div className="space-y-2">
+                <div className="flex justify-between">
+                    <span>年収上限</span>
+                    <span>{result.annualLimit.toLocaleString()}円</span>
+                </div>
+
+                <div className="flex justify-between">
+                    <span>月の収入上限</span>
+                    <span>{result.monthlyIncomeLimit.toLocaleString()}円</span>
+                </div>
+
+                {includeTransportationCost && (
+                <div className="flex justify-between">
+                    <span>年間交通費</span>
+                    <span>-{result.yearlyTransportationCost.toLocaleString()}円</span>
+                </div>
+                )}
+
+                <div className="flex justify-between">
+                    <span>月に稼げる給与上限</span>
+                    <span>{result.monthlyWageLimit.toLocaleString()}円</span>
+                </div>
+
+                <hr />
+
+                <div className="mt-6 rounded-lg bg-blue-50 p-4 text-center">
+                    <div className="text-sm text-gray-600">
+                        月に働ける時間
+                    </div>
+
+                    <div className="mt-2 text-3xl font-bold">
+                        {result.monthlyWorkingHours.toLocaleString()}時間
+                    </div>
+                </div>
+
+                <div className="mt-4 flex justify-between">
+                    <span>週に働ける時間</span>
+                    <span>{result.weeklyWorkingHours.toLocaleString()}時間</span>
+                </div>
+
+                <div className="flex justify-between">
+                    <span>1日あたり働ける時間</span>
+                    <span>{result.hoursPerDay.toLocaleString()}時間</span>
+                </div>
+
+                <div className="flex justify-between">
+                    <span>月の勤務日数目安</span>
+                    <span>{result.monthlyWorkingDays.toLocaleString()}日</span>
+                </div>
+
+                <div className="flex justify-between">
+                    <span>年間で働ける時間</span>
+                    <span>{result.yearlyWorkingHours.toLocaleString()}時間</span>
+                </div>
             </div>
 
-            <div className="flex justify-between">
-              <span>月の収入上限</span>
-              <span>{result.monthlyIncomeLimit.toLocaleString()}円</span>
+            <button
+                className="mt-6 w-full rounded-lg bg-gray-200 px-4 py-2 font-bold hover:bg-gray-300"
+                onClick={resetInputs}
+            >
+                入力内容をリセット
+            </button>
             </div>
-
-            {includeTransportationCost && (
-              <div className="flex justify-between">
-                <span>年間交通費</span>
-                <span>-{result.yearlyTransportationCost.toLocaleString()}円</span>
-              </div>
-            )}
-
-            <div className="flex justify-between">
-              <span>月に稼げる給与上限</span>
-              <span>{result.monthlyWageLimit.toLocaleString()}円</span>
-            </div>
-
-            <hr />
-
-            <div className="mt-6 rounded-lg bg-blue-50 p-4 text-center">
-              <div className="text-sm text-gray-600">
-                月に働ける時間
-              </div>
-
-              <div className="mt-2 text-3xl font-bold">
-                {result.monthlyWorkingHours.toLocaleString()}時間
-              </div>
-            </div>
-
-            <div className="mt-4 flex justify-between">
-              <span>週に働ける時間</span>
-              <span>{result.weeklyWorkingHours.toLocaleString()}時間</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>1日あたり働ける時間</span>
-              <span>{result.hoursPerDay.toLocaleString()}時間</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>月の勤務日数目安</span>
-              <span>{result.monthlyWorkingDays.toLocaleString()}日</span>
-            </div>
-
-            <div className="flex justify-between">
-              <span>年間で働ける時間</span>
-              <span>{result.yearlyWorkingHours.toLocaleString()}時間</span>
-            </div>
-          </div>
-
-          <button
-            className="mt-6 w-full rounded-lg bg-gray-200 px-4 py-2 font-bold hover:bg-gray-300"
-            onClick={resetInputs}
-          >
-            入力内容をリセット
-          </button>
         </div>
-      </div>
 
-      {/* 注意書き・補足説明 */}
-      <section className="mt-8 rounded-xl border border-gray-200 bg-white p-5 shadow">
-        <h2 className="mb-4 text-xl font-bold">この計算機について</h2>
+        {/* 注意書き・補足説明 */}
+        <section className="mt-8 rounded-xl border border-gray-200 bg-white p-5 shadow">
+            <h2 className="mb-4 text-xl font-bold">この計算機について</h2>
 
-        <div className="space-y-4 text-sm leading-7 text-gray-700">
-          <div>
-            <h3 className="font-bold text-gray-900">計算できる内容</h3>
-            <p>
-              時給、月の交通費、週の勤務日数、年収上限から、扶養範囲内で働くための月の勤務時間・週の勤務時間・1日あたりの勤務時間を逆算できます。
-            </p>
-          </div>
+            <div className="space-y-3 text-sm leading-7 text-gray-700">
+                <details className="rounded-lg border border-gray-200 bg-white p-4" open>
+                <summary className="cursor-pointer font-bold text-gray-900">
+                    計算できる内容
+                </summary>
+                <div className="mt-3 space-y-2">
+                    <p>
+                    時給、月の交通費、週の勤務日数、年収上限から、扶養範囲内で働くための月の勤務時間・週の勤務時間・1日あたりの勤務時間を逆算できます。
+                    </p>
+                    <p>
+                    「時給1200円で扶養内に収めるには月何時間まで働けるか」「130万円以内なら週何時間くらいか」などをざっくり確認したいときに使えます。
+                    </p>
+                </div>
+                </details>
 
-          <div>
-            <h3 className="font-bold text-gray-900">使い方</h3>
-            <p>
-              「時給」と「年収上限」を入力すると、その範囲内に収めるために月何時間くらい働けるかを計算します。
-            </p>
-            <p>
-              週の勤務日数を変えると、1日あたり何時間まで働けるかの目安も変わります。
-            </p>
-          </div>
+                <details className="rounded-lg border border-gray-200 bg-white p-4">
+                <summary className="cursor-pointer font-bold text-gray-900">
+                    使い方
+                </summary>
+                <div className="mt-3 space-y-2">
+                    <p>
+                    「時給」と「年収上限」を入力すると、その範囲内に収めるために月何時間くらい働けるかを計算します。
+                    </p>
+                    <p>
+                    週の勤務日数を変えると、1日あたり何時間まで働けるかの目安も変わります。
+                    </p>
+                    <p>
+                    交通費を年収上限に含める場合は、月の交通費を入力してチェックを入れてください。
+                    </p>
+                </div>
+                </details>
 
-          <div>
-            <h3 className="font-bold text-gray-900">注意事項</h3>
-            <p>この計算結果は目安です。</p>
-            <p>
-              扶養や社会保険の判定は、年齢、学生かどうか、勤務先の従業員数、週の所定労働時間、月額賃金、交通費の扱い、配偶者・親の扶養かどうかによって変わります。
-            </p>
-            <p>
-              特に106万円・130万円の壁は、収入額だけでなく勤務先や労働条件によって扱いが変わるため、最終判断は勤務先や専門窓口に確認してください。
-            </p>
-          </div>
+                <details className="rounded-lg border border-gray-200 bg-white p-4">
+                <summary className="cursor-pointer font-bold text-gray-900">
+                    扶養内で働くとは？
+                </summary>
+                <div className="mt-3 space-y-2">
+                    <p>
+                    扶養内で働くとは、税金や社会保険の負担が大きく変わらない範囲を意識して、年収や勤務時間を調整しながら働くことを指す場合が多いです。
+                    </p>
+                    <p>
+                    ただし、扶養の判定は年収だけで決まるとは限りません。勤務先の規模、週の所定労働時間、月額賃金、学生かどうか、配偶者や親の扶養かどうかによって扱いが変わります。
+                    </p>
+                </div>
+                </details>
+
+                <details className="rounded-lg border border-gray-200 bg-white p-4">
+                <summary className="cursor-pointer font-bold text-gray-900">
+                    103万円・106万円・130万円・150万円・160万円の違い
+                </summary>
+                <div className="mt-3 overflow-x-auto">
+                    <table className="w-full min-w-[620px] border-collapse text-left text-sm">
+                    <thead>
+                        <tr className="border-b bg-gray-50">
+                        <th className="px-3 py-2 font-bold">年収の目安</th>
+                        <th className="px-3 py-2 font-bold">主な意味</th>
+                        <th className="px-3 py-2 font-bold">注意点</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr className="border-b">
+                        <td className="px-3 py-2">103万円</td>
+                        <td className="px-3 py-2">よく使われる扶養の目安</td>
+                        <td className="px-3 py-2">
+                            税制改正や家族構成によって実際の影響は変わります。
+                        </td>
+                        </tr>
+                        <tr className="border-b">
+                        <td className="px-3 py-2">106万円</td>
+                        <td className="px-3 py-2">社会保険加入の目安</td>
+                        <td className="px-3 py-2">
+                            勤務先の規模や週の労働時間など、収入以外の条件も関係します。
+                        </td>
+                        </tr>
+                        <tr className="border-b">
+                        <td className="px-3 py-2">130万円</td>
+                        <td className="px-3 py-2">社会保険の扶養目安</td>
+                        <td className="px-3 py-2">
+                            交通費や今後の見込み収入を含めて判断されることがあります。
+                        </td>
+                        </tr>
+                        <tr className="border-b">
+                        <td className="px-3 py-2">150万円</td>
+                        <td className="px-3 py-2">配偶者特別控除の目安</td>
+                        <td className="px-3 py-2">
+                            配偶者の所得や制度改正によって控除額は変わります。
+                        </td>
+                        </tr>
+                        <tr>
+                        <td className="px-3 py-2">160万円</td>
+                        <td className="px-3 py-2">税制改正後の目安</td>
+                        <td className="px-3 py-2">
+                            今後の制度変更や個別条件に注意が必要です。
+                        </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </details>
+
+            <details className="rounded-lg border border-gray-200 bg-white p-4">
+            <summary className="cursor-pointer font-bold text-gray-900">
+                時給別の勤務時間目安
+            </summary>
+            <div className="mt-3 space-y-3">
+                <p>
+                交通費を含めず、週3日働く場合の目安です。実際の勤務シフトや交通費の扱いによって変わります。
+                </p>
+                <div className="overflow-x-auto">
+                <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+                    <thead>
+                    <tr className="border-b bg-gray-50">
+                        <th className="px-3 py-2 font-bold">時給</th>
+                        <th className="px-3 py-2 font-bold">
+                        103万円以内の月時間
+                        </th>
+                        <th className="px-3 py-2 font-bold">
+                        130万円以内の月時間
+                        </th>
+                        <th className="px-3 py-2 font-bold">
+                        130万円以内の1日時間
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {exampleResults.map((example) => (
+                        <tr key={example.hourlyWage} className="border-b">
+                        <td className="px-3 py-2">
+                            {example.hourlyWage.toLocaleString()}円
+                        </td>
+                        <td className="px-3 py-2">
+                            約{example.limit103.monthlyWorkingHours.toLocaleString()}
+                            時間
+                        </td>
+                        <td className="px-3 py-2">
+                            約{example.limit130.monthlyWorkingHours.toLocaleString()}
+                            時間
+                        </td>
+                        <td className="px-3 py-2">
+                            約{example.limit130.hoursPerDay.toLocaleString()}時間
+                        </td>
+                        </tr>
+                    ))}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+            </details>
+
+            <details className="rounded-lg border border-gray-200 bg-white p-4">
+            <summary className="cursor-pointer font-bold text-gray-900">
+                交通費は年収上限に含めるべき？
+            </summary>
+            <div className="mt-3 space-y-2">
+                <p>
+                税金の計算と社会保険の判定では、交通費の扱いが同じとは限りません。
+                </p>
+                <p>
+                社会保険の扶養判定では、交通費などを含めた収入見込みで見られる場合があります。安全側に見積もりたい場合は、「交通費を年収上限に含める」にチェックを入れて計算してください。
+                </p>
+            </div>
+            </details>
+
+            <details className="rounded-lg border border-gray-200 bg-white p-4">
+            <summary className="cursor-pointer font-bold text-gray-900">
+                注意事項
+            </summary>
+            <div className="mt-3 space-y-2">
+                <p>この計算結果は目安です。</p>
+                <p>
+                扶養や社会保険の判定は、年齢、学生かどうか、勤務先の従業員数、週の所定労働時間、月額賃金、交通費の扱い、配偶者・親の扶養かどうかによって変わります。
+                </p>
+                <p>
+                特に106万円・130万円の壁は、収入額だけでなく勤務先や労働条件によって扱いが変わるため、最終判断は勤務先や専門窓口に確認してください。
+                </p>
+            </div>
+            </details>
         </div>
-      </section>
+        </section>
     </main>
   );
 }
