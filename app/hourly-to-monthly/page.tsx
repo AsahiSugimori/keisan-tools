@@ -3,7 +3,7 @@ import HourlyToMonthlyCalculator
   from "../../components/HourlyToMonthlyCalculator";
 
 export const metadata: Metadata = {
-  title: "サクミル（時給→月給計算機）",
+  title: "ヨサンメモ（時給→月給計算機）",
   description:
     "時給、1日の労働時間、月の勤務日数、交通費、残業時間から月収・年収を無料で計算できます。",
 };

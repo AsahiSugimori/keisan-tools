@@ -1,5 +1,7 @@
 "use client";
 
+import { minNumberInputValue } from "../lib/commonInputConstants";
+
 type NumberInputProps = {
   /** ラベル名称 */
   label: string;
@@ -34,14 +36,14 @@ export default function NumberInput({
 }: NumberInputProps) {
   return (
     <div className="mb-4">
-      <label className="mb-1 block text-sm font-medium text-gray-700">
+      <label className="mb-1 block font-bold text-gray-700">
         {label}
       </label>
       <input
         ref={inputRef}
         type="number"
         value={value}
-        min={0}
+        min={minNumberInputValue}
         max={maxValue}
         className="w-full rounded-lg border border-gray-300 px-3 py-2 text-lg shadow-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
         onFocus={(event) => {

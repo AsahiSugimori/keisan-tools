@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     apple: "/icon.png",
   },
   title: {
-    default: "サクミル",
+    default: "ヨサンメモ",
     template: "%s",
   },
   description:
@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     google: "iyfgbgeSNY-fbd6FvVklVswnhOZyC0xG-ot9I-naMZ8",
   },
   openGraph: {
-    title: "サクミル",
+    title: "ヨサンメモ",
     description:
       "時給計算、年収計算、残業代計算など仕事や生活に役立つ計算ツールを無料で利用できます。",
-    siteName: "サクミル",
+    siteName: "ヨサンメモ",
     locale: "ja_JP",
     type: "website",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
         url: "/ogp.png",
         width: 1200,
         height: 630,
-        alt: "サクミルのOGP画像",
+        alt: "ヨサンメモのOGP画像",
       },
     ],
   },
@@ -62,7 +62,7 @@ export default function RootLayout({
         <header className="border-b bg-white shadow-sm">
           <div className="mx-auto max-w-5xl px-4 py-4">
             <a href="/" className="text-xl font-bold hover:text-blue-600">
-              サクミル
+              ヨサンメモ
             </a>
           </div>
         </header>
@@ -82,7 +82,7 @@ export default function RootLayout({
                 お問い合わせ
               </a>
             </div>
-            <p>© 2026 サクミル</p>
+            <p>© 2026 ヨサンメモ</p>
           </div>
         </footer>
       </body>

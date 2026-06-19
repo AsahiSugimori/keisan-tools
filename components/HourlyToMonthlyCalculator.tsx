@@ -1,6 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import {
+  defaultHourlyWage,
+  defaultOvertimeHours,
+  defaultTransportationCost,
+  defaultWorkingDaysPerMonth,
+  defaultWorkingHoursPerDay,
+  hourlyWageStorageKey,
+  maxHourlyWage,
+  maxOvertimeHours,
+  maxTransportationCost,
+  maxWorkingDaysPerMonth,
+  maxWorkingHoursPerDay,
+  overtimeHoursStorageKey,
+  overtimeRate,
+  transportationCostStorageKey,
+  workingDaysStorageKey,
+  workingHoursStorageKey,
+} from "../lib/hourlyToMonthlyConstants";
 import NumberInput from "./NumberInput";
 
 /**
@@ -68,38 +86,36 @@ export default function HourlyToMonthlyCalculator() {
   const overtimeHoursInputRef = useRef<HTMLInputElement>(null);
 
   /** 入力文字列(時給) */
-  const [hourlyWageText, setHourlyWageText] = useState("1200");
+  const [hourlyWageText, setHourlyWageText] = useState(String(defaultHourlyWage));
   /** 入力文字列(1日の労働時間) */
-  const [workingHoursText, setWorkingHoursText] = useState("8");
+  const [workingHoursText, setWorkingHoursText] = useState(String(defaultWorkingHoursPerDay));
   /** 入力文字列(月の勤務日数) */
-  const [workingDaysText, setWorkingDaysText] = useState("20");
+  const [workingDaysText, setWorkingDaysText] = useState(String(defaultWorkingDaysPerMonth));
   /** 入力文字列(交通費) */
-  const [transportationCostText, setTransportationCostText] = useState("0");
+  const [transportationCostText, setTransportationCostText] = useState(String(defaultTransportationCost));
   /** 入力文字列(残業時間) */
-  const [overtimeHoursText, setOvertimeHoursText] = useState("0");
+  const [overtimeHoursText, setOvertimeHoursText] = useState(String(defaultOvertimeHours));
 
   /** 計算用確定値(時給) */
-  const [hourlyWage, setHourlyWage] = useState(1200);
+  const [hourlyWage, setHourlyWage] = useState(defaultHourlyWage);
   /** 計算用確定値(1日の労働時間) */
-  const [workingHoursPerDay, setWorkingHoursPerDay] = useState(8);
+  const [workingHoursPerDay, setWorkingHoursPerDay] = useState(defaultWorkingHoursPerDay);
   /** 計算用確定値(月の勤務日数) */
-  const [workingDaysPerMonth, setWorkingDaysPerMonth] = useState(20);
+  const [workingDaysPerMonth, setWorkingDaysPerMonth] = useState(defaultWorkingDaysPerMonth);
   /** 計算用確定値(交通費) */
-  const [transportationCost, setTransportationCost] = useState(0);
+  const [transportationCost, setTransportationCost] = useState(defaultTransportationCost);
   /** 計算用確定値(残業時間) */
-  const [overtimeHours, setOvertimeHours] = useState(0);
-  /** 計算用確定値(残業倍率) */
-  const overtimeRate=1.25;
+  const [overtimeHours, setOvertimeHours] = useState(defaultOvertimeHours);
 
   /**
    * 保存済み入力値を読み込む
    */
   useEffect(() => {
-    const savedHourlyWage = localStorage.getItem("hourlyWage");
-    const savedWorkingHours = localStorage.getItem("workingHours");
-    const savedWorkingDays = localStorage.getItem("workingDays");
-    const savedTransportationCost = localStorage.getItem("transportationCost");
-    const savedOvertimeHours = localStorage.getItem("overtimeHours");
+    const savedHourlyWage = localStorage.getItem(hourlyWageStorageKey);
+    const savedWorkingHours = localStorage.getItem(workingHoursStorageKey);
+    const savedWorkingDays = localStorage.getItem(workingDaysStorageKey);
+    const savedTransportationCost = localStorage.getItem(transportationCostStorageKey);
+    const savedOvertimeHours = localStorage.getItem(overtimeHoursStorageKey);
 
     if (savedHourlyWage !== null) {
       setHourlyWageText(savedHourlyWage);
@@ -132,13 +148,13 @@ export default function HourlyToMonthlyCalculator() {
    */
   const commitHourlyWage = () => {
     const value = Math.min(
-      100000,
+      maxHourlyWage,
       Math.max(0, Number(hourlyWageText) || 0)
     );
 
     setHourlyWage(value);
     setHourlyWageText(String(value));
-    localStorage.setItem("hourlyWage", String(value));
+    localStorage.setItem(hourlyWageStorageKey, String(value));
   };
 
   /**
@@ -146,24 +162,27 @@ export default function HourlyToMonthlyCalculator() {
    */
   const commitWorkingHours = () => {
     const value = Math.min(
-      24,
+      maxWorkingHoursPerDay,
       Math.max(0, Number(workingHoursText) || 0)
     );
 
     setWorkingHoursPerDay(value);
     setWorkingHoursText(String(value));
-    localStorage.setItem("workingHours", String(value));
+    localStorage.setItem(workingHoursStorageKey, String(value));
   };
 
   /**
    * 「月の勤務日数」の入力文字列を検証し、計算用の「月の勤務日数」に反映する
    */
   const commitWorkingDays = () => {
-    const value = Math.min(31, Math.max(0, Number(workingDaysText) || 0));
+    const value = Math.min(
+      maxWorkingDaysPerMonth,
+      Math.max(0, Number(workingDaysText) || 0)
+    );
 
     setWorkingDaysPerMonth(value);
     setWorkingDaysText(String(value));
-    localStorage.setItem("workingDays", String(value));
+    localStorage.setItem(workingDaysStorageKey, String(value));
   };
 
   /**
@@ -171,13 +190,13 @@ export default function HourlyToMonthlyCalculator() {
    */
   const commitTransportationCost = () => {
     const value = Math.min(
-      100000,
+      maxTransportationCost,
       Math.max(0, Number(transportationCostText) || 0)
     );
 
     setTransportationCost(value);
     setTransportationCostText(String(value));
-    localStorage.setItem("transportationCost", String(value));
+    localStorage.setItem(transportationCostStorageKey, String(value));
   };
 
   /**
@@ -186,36 +205,36 @@ export default function HourlyToMonthlyCalculator() {
   const commitOvertimeHours = () => {
     const value =
       Math.min(
-        300,
+        maxOvertimeHours,
         Math.max(0, Number(overtimeHoursText) || 0)
       );
 
     setOvertimeHours(value);
     setOvertimeHoursText(String(value));
-    localStorage.setItem("overtimeHours", String(value));
+    localStorage.setItem(overtimeHoursStorageKey, String(value));
   };
 
   /**
    * 入力値を初期状態に戻す
    */
   const resetInputs = () => {
-    setHourlyWageText("1200");
-    setWorkingHoursText("8");
-    setWorkingDaysText("20");
-    setTransportationCostText("0");
-    setOvertimeHoursText("0");
+    setHourlyWageText(String(defaultHourlyWage));
+    setWorkingHoursText(String(defaultWorkingHoursPerDay));
+    setWorkingDaysText(String(defaultWorkingDaysPerMonth));
+    setTransportationCostText(String(defaultTransportationCost));
+    setOvertimeHoursText(String(defaultOvertimeHours));
 
-    setHourlyWage(1200);
-    setWorkingHoursPerDay(8);
-    setWorkingDaysPerMonth(20);
-    setTransportationCost(0);
-    setOvertimeHours(0);
+    setHourlyWage(defaultHourlyWage);
+    setWorkingHoursPerDay(defaultWorkingHoursPerDay);
+    setWorkingDaysPerMonth(defaultWorkingDaysPerMonth);
+    setTransportationCost(defaultTransportationCost);
+    setOvertimeHours(defaultOvertimeHours);
 
-    localStorage.removeItem("hourlyWage");
-    localStorage.removeItem("workingHours");
-    localStorage.removeItem("workingDays");
-    localStorage.removeItem("transportationCost");
-    localStorage.removeItem("overtimeHours");
+    localStorage.removeItem(hourlyWageStorageKey);
+    localStorage.removeItem(workingHoursStorageKey);
+    localStorage.removeItem(workingDaysStorageKey);
+    localStorage.removeItem(transportationCostStorageKey);
+    localStorage.removeItem(overtimeHoursStorageKey);
   };
 
   /** 計算結果(基本月収) */
@@ -245,7 +264,7 @@ export default function HourlyToMonthlyCalculator() {
           <NumberInput
             label="時給（円）"
             value={hourlyWageText}
-            maxValue={100000}
+            maxValue={maxHourlyWage}
             inputRef={hourlyWageInputRef}
             onChange={setHourlyWageText}
             onCommit={commitHourlyWage}
@@ -258,7 +277,7 @@ export default function HourlyToMonthlyCalculator() {
           <NumberInput
             label="1日の労働時間"
             value={workingHoursText}
-            maxValue={24}
+            maxValue={maxWorkingHoursPerDay}
             inputRef={workingHoursInputRef}
             onChange={setWorkingHoursText}
             onCommit={commitWorkingHours}
@@ -271,7 +290,7 @@ export default function HourlyToMonthlyCalculator() {
           <NumberInput
             label="月の勤務日数"
             value={workingDaysText}
-            maxValue={31}
+            maxValue={maxWorkingDaysPerMonth}
             inputRef={workingDaysInputRef}
             onChange={setWorkingDaysText}
             onCommit={commitWorkingDays}
@@ -284,7 +303,7 @@ export default function HourlyToMonthlyCalculator() {
           <NumberInput
             label="交通費（円）"
             value={transportationCostText}
-            maxValue={100000}
+            maxValue={maxTransportationCost}
             inputRef={transportationCostInputRef}
             onChange={setTransportationCostText}
             onCommit={commitTransportationCost}
@@ -297,7 +316,7 @@ export default function HourlyToMonthlyCalculator() {
           <NumberInput
             label="残業時間（月）"
             value={overtimeHoursText}
-            maxValue={300}
+            maxValue={maxOvertimeHours}
             inputRef={overtimeHoursInputRef}
             onChange={setOvertimeHoursText}
             onCommit={commitOvertimeHours}
