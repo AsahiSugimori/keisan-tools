@@ -12,6 +12,7 @@ import {
   defaultAgeGroup,
   defaultCustomCareInsuranceRatePercent,
   defaultCustomHealthInsuranceRatePercent,
+  defaultEstimatedAnnualBonus,
   defaultGrossMonthlySalary,
   defaultHealthInsuranceType,
   defaultIncludeResidentTax,
@@ -19,6 +20,7 @@ import {
   defaultSocialInsuranceCalculationMode,
   defaultStandardMonthlyRemuneration,
   employmentInsuranceEmployeeRate,
+  estimatedAnnualBonusStorageKey,
   grossMonthlySalaryStorageKey,
   healthInsuranceTypeLabels,
   healthInsuranceTypeStorageKey,
@@ -31,6 +33,7 @@ import {
   kyoukaiKenpoHealthInsuranceRates,
   maxCustomCareInsuranceRatePercent,
   maxCustomHealthInsuranceRatePercent,
+  maxEstimatedAnnualBonus,
   maxGrossMonthlySalary,
   maxStandardMonthlyRemuneration,
   minMoneyValue,
@@ -295,9 +298,15 @@ function calculateEmployeeTakeHomePay(
 export default function TakeHomePayCalculator() {
   /** 額面月給入力欄参照 */
   const grossMonthlySalaryInputRef = useRef<HTMLInputElement>(null);
+  /** 賞与見込み入力欄参照 */
+  const estimatedAnnualBonusInputRef = useRef<HTMLInputElement>(null);
   /** 入力文字列(額面月給) */
   const [grossMonthlySalaryText, setGrossMonthlySalaryText] = useState(
     String(defaultGrossMonthlySalary)
+  );
+  /** 入力文字列(賞与見込み・年額) */
+  const [estimatedAnnualBonusText, setEstimatedAnnualBonusText] = useState(
+    String(defaultEstimatedAnnualBonus)
   );
   /** 入力文字列(標準報酬月額) */
   const [standardMonthlyRemunerationText, setStandardMonthlyRemunerationText] =
@@ -310,6 +319,10 @@ export default function TakeHomePayCalculator() {
     useState(String(defaultCustomCareInsuranceRatePercent));
   /** 計算用確定値(額面月給) */
   const [grossMonthlySalary, setGrossMonthlySalary] = useState(defaultGrossMonthlySalary);
+  /** 計算用確定値(賞与見込み・年額) */
+  const [estimatedAnnualBonus, setEstimatedAnnualBonus] = useState(
+    defaultEstimatedAnnualBonus
+  );
   /** 計算用確定値(標準報酬月額) */
   const [standardMonthlyRemuneration, setStandardMonthlyRemuneration] = useState(
     defaultStandardMonthlyRemuneration
@@ -340,6 +353,9 @@ export default function TakeHomePayCalculator() {
    */
   useEffect(() => {
     const savedGrossMonthlySalary = localStorage.getItem(grossMonthlySalaryStorageKey);
+    const savedEstimatedAnnualBonus = localStorage.getItem(
+      estimatedAnnualBonusStorageKey
+    );
     const savedStandardMonthlyRemuneration = localStorage.getItem(
       standardMonthlyRemunerationStorageKey
     );
@@ -360,6 +376,11 @@ export default function TakeHomePayCalculator() {
     if (savedGrossMonthlySalary !== null) {
       setGrossMonthlySalaryText(savedGrossMonthlySalary);
       setGrossMonthlySalary(Number(savedGrossMonthlySalary));
+    }
+
+    if (savedEstimatedAnnualBonus !== null) {
+      setEstimatedAnnualBonusText(savedEstimatedAnnualBonus);
+      setEstimatedAnnualBonus(Number(savedEstimatedAnnualBonus));
     }
 
     if (savedStandardMonthlyRemuneration !== null) {
@@ -418,13 +439,28 @@ export default function TakeHomePayCalculator() {
    */
   const commitGrossMonthlySalary = () => {
     const value = Math.min(
-      maxGrossMonthlySalary,
+      maxEstimatedAnnualBonus,
+  maxGrossMonthlySalary,
       Math.max(minMoneyValue, Number(grossMonthlySalaryText) || minMoneyValue)
     );
 
     setGrossMonthlySalary(value);
     setGrossMonthlySalaryText(String(value));
     localStorage.setItem(grossMonthlySalaryStorageKey, String(value));
+  };
+
+  /**
+   * 「賞与見込み」の入力文字列を検証し、計算用の「賞与見込み」に反映する
+   */
+  const commitEstimatedAnnualBonus = () => {
+    const value = Math.min(
+      maxEstimatedAnnualBonus,
+      Math.max(minMoneyValue, Number(estimatedAnnualBonusText) || minMoneyValue)
+    );
+
+    setEstimatedAnnualBonus(value);
+    setEstimatedAnnualBonusText(String(value));
+    localStorage.setItem(estimatedAnnualBonusStorageKey, String(value));
   };
 
   /**
@@ -526,10 +562,12 @@ export default function TakeHomePayCalculator() {
    */
   const resetInputs = () => {
     setGrossMonthlySalaryText(String(defaultGrossMonthlySalary));
+    setEstimatedAnnualBonusText(String(defaultEstimatedAnnualBonus));
     setStandardMonthlyRemunerationText(String(defaultStandardMonthlyRemuneration));
     setCustomHealthInsuranceRateText(String(defaultCustomHealthInsuranceRatePercent));
     setCustomCareInsuranceRateText(String(defaultCustomCareInsuranceRatePercent));
     setGrossMonthlySalary(defaultGrossMonthlySalary);
+    setEstimatedAnnualBonus(defaultEstimatedAnnualBonus);
     setStandardMonthlyRemuneration(defaultStandardMonthlyRemuneration);
     setCustomHealthInsuranceRate(
       defaultCustomHealthInsuranceRatePercent / percentRateDivisor
@@ -542,6 +580,7 @@ export default function TakeHomePayCalculator() {
     setIncludeResidentTax(defaultIncludeResidentTax);
 
     localStorage.removeItem(grossMonthlySalaryStorageKey);
+    localStorage.removeItem(estimatedAnnualBonusStorageKey);
     localStorage.removeItem(standardMonthlyRemunerationStorageKey);
     localStorage.removeItem(prefectureStorageKey);
     localStorage.removeItem(healthInsuranceTypeStorageKey);
@@ -575,6 +614,10 @@ export default function TakeHomePayCalculator() {
     ageGroup,
     includeResidentTax
   );
+  /** 賞与込み額面年収 */
+  const yearlyGrossSalaryWithBonus = result.yearlyGrossSalary + estimatedAnnualBonus;
+  /** 賞与を単純加算した年間手取り目安 */
+  const yearlyTakeHomePayWithBonusSimple = result.yearlyTakeHomePay + estimatedAnnualBonus;
 
   return (
     <main className="mx-auto max-w-3xl p-4">
@@ -598,9 +641,26 @@ export default function TakeHomePayCalculator() {
             onChange={setGrossMonthlySalaryText}
             onCommit={commitGrossMonthlySalary}
             onEnter={() => {
-              grossMonthlySalaryInputRef.current?.blur();
+              estimatedAnnualBonusInputRef.current?.focus();
             }}
           />
+
+          {/* 入力項目(賞与見込み) */}
+          <NumberInput
+            label="賞与見込み（年額・円）"
+            value={estimatedAnnualBonusText}
+            maxValue={maxEstimatedAnnualBonus}
+            inputRef={estimatedAnnualBonusInputRef}
+            onChange={setEstimatedAnnualBonusText}
+            onCommit={commitEstimatedAnnualBonus}
+            onEnter={() => {
+              estimatedAnnualBonusInputRef.current?.blur();
+            }}
+          />
+
+          <p className="mt-1 text-xs leading-6 text-gray-500">
+            賞与がある場合は、年間の見込み額を入力してください。賞与の社会保険料・所得税は別計算になるため、年間手取りは簡易目安です。
+          </p>
 
           {/* 入力項目(社会保険料の計算方法) */}
           <div className="mt-4">
@@ -781,6 +841,11 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div className="flex justify-between">
+              <span>賞与見込み（年額）</span>
+              <span>{estimatedAnnualBonus.toLocaleString()}円</span>
+            </div>
+
+            <div className="flex justify-between">
               <span>社会保険料の計算方法</span>
               <span>{socialInsuranceCalculationModeLabels[socialInsuranceCalculationMode]}</span>
             </div>
@@ -864,14 +929,28 @@ export default function TakeHomePayCalculator() {
             </div>
 
             <div className="mt-4 flex justify-between">
-              <span>額面年収</span>
+              <span>賞与なし額面年収</span>
               <span>{result.yearlyGrossSalary.toLocaleString()}円</span>
             </div>
 
+            <div className="flex justify-between font-bold">
+              <span>賞与込み額面年収</span>
+              <span>{yearlyGrossSalaryWithBonus.toLocaleString()}円</span>
+            </div>
+
             <div className="flex justify-between">
-              <span>概算年間手取り</span>
+              <span>月給分の概算年間手取り</span>
               <span>{result.yearlyTakeHomePay.toLocaleString()}円</span>
             </div>
+
+            <div className="flex justify-between font-bold">
+              <span>賞与込み年間手取り目安</span>
+              <span>{yearlyTakeHomePayWithBonusSimple.toLocaleString()}円</span>
+            </div>
+
+            <p className="text-xs leading-6 text-gray-500">
+              賞与込み年間手取り目安は、賞与見込みを単純加算した簡易表示です。賞与から引かれる社会保険料・所得税は別途変わります。
+            </p>
           </div>
 
           <button
@@ -891,7 +970,7 @@ export default function TakeHomePayCalculator() {
           <div>
             <h3 className="font-bold text-gray-900">計算できる内容</h3>
             <p>
-              会社員の月給（額面）から、社会保険料・所得税・住民税を差し引いた概算手取り額を計算できます。
+              会社員の月給（額面）から、社会保険料・所得税・住民税を差し引いた概算手取り額を計算できます。賞与見込みを入力すると、賞与込みの額面年収と年間手取り目安も確認できます。
             </p>
           </div>
 
@@ -918,7 +997,7 @@ export default function TakeHomePayCalculator() {
             <h3 className="font-bold text-gray-900">注意事項</h3>
             <p>この計算結果は概算です。</p>
             <p>
-              実際の手取り額は、勤務先、加入している健康保険、標準報酬月額、扶養人数、賞与、各種控除などによって異なります。
+              実際の手取り額は、勤務先、加入している健康保険、標準報酬月額、扶養人数、賞与、各種控除などによって異なります。賞与の手取りは月給とは計算方法が異なるため、このページでは簡易目安として表示しています。
             </p>
             <p>
               住民税は前年の所得をもとに計算されるため、新卒1年目などは給与から引かれていない場合があります。

@@ -89,6 +89,16 @@ export const defaultGrossMonthlySalary = 300000;
 export const maxGrossMonthlySalary = 10000000;
 
 /**
+ * 初期値(賞与見込み・年額)
+ */
+export const defaultEstimatedAnnualBonus = 0;
+
+/**
+ * 上限値(賞与見込み・年額)
+ */
+export const maxEstimatedAnnualBonus = 50000000;
+
+/**
  * 初期値(標準報酬月額)
  */
 export const defaultStandardMonthlyRemuneration = 300000;
@@ -314,6 +324,11 @@ export const incomeTaxBrackets: IncomeTaxBracket[] = [
  * localStorageキー(額面月給)
  */
 export const grossMonthlySalaryStorageKey = "takeHomeGrossMonthlySalary";
+
+/**
+ * localStorageキー(賞与見込み・年額)
+ */
+export const estimatedAnnualBonusStorageKey = "takeHomeEstimatedAnnualBonus";
 
 /**
  * localStorageキー(標準報酬月額)
