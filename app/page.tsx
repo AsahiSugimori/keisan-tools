@@ -24,7 +24,7 @@ export default function Home() {
       <section className="mb-8">
         <h2 className="mb-4 text-2xl font-bold">よく使う計算ツール</h2>
 
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           <Link
             href="/take-home-pay"
             className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
@@ -62,6 +62,19 @@ export default function Home() {
             <div className="font-bold">源泉徴収計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
               報酬額から源泉徴収税額と差引入金額を概算できます。
+            </p>
+          </Link>
+
+          <Link
+            href="/freelance-income"
+            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
+          >
+            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
+              フリーランス向け
+            </div>
+            <div className="font-bold">フリーランス報酬計算機</div>
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              売上と経費から月の利益・年間利益を概算できます。
             </p>
           </Link>
 
@@ -153,19 +166,20 @@ export default function Home() {
             <div className="mb-4 flex items-center justify-between gap-3">
               <h3 className="text-lg font-bold">フリーランス向け</h3>
               <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
-                一部公開
+                公開中
               </span>
             </div>
 
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
-                <div className="font-bold text-gray-500">
-                  フリーランス報酬計算機
-                </div>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  報酬額から源泉徴収や手取り額を計算できるツールを追加予定です。
+              <Link
+                href="/freelance-income"
+                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-blue-50"
+              >
+                <div className="font-bold">フリーランス報酬計算機</div>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  売上と経費から月の利益・年間利益を概算できます。
                 </p>
-              </div>
+              </Link>
 
               <Link
                 href="/withholding-tax"
