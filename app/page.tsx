@@ -24,7 +24,7 @@ export default function Home() {
       <section className="mb-8">
         <h2 className="mb-4 text-2xl font-bold">よく使う計算ツール</h2>
 
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           <Link
             href="/take-home-pay"
             className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
@@ -37,7 +37,6 @@ export default function Home() {
               月給から社会保険料・税金を差し引いた手取り額を概算できます。
             </p>
           </Link>
-
 
           <Link
             href="/bonus-take-home-pay"
@@ -66,54 +65,15 @@ export default function Home() {
           </Link>
 
           <Link
-            href="/freelance-income"
-            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
-          >
-            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
-              フリーランス向け
-            </div>
-            <div className="font-bold">フリーランス報酬計算機</div>
-            <p className="mt-2 text-sm leading-6 text-gray-600">
-              売上と経費から月の利益・年間利益を概算できます。
-            </p>
-          </Link>
-
-          <Link
-            href="/consumption-tax"
+            href="/monthly-expense"
             className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
           >
             <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
               生活費・買い物
             </div>
-            <div className="font-bold">消費税計算機</div>
+            <div className="font-bold">月の出費計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              税込・税抜価格と消費税額をかんたんに計算できます。
-            </p>
-          </Link>
-
-          <Link
-            href="/hourly-to-monthly"
-            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
-          >
-            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
-              アルバイト向け
-            </div>
-            <div className="font-bold">時給→月給計算機</div>
-            <p className="mt-2 text-sm leading-6 text-gray-600">
-              時給・勤務時間・勤務日数から月収と年収を計算できます。
-            </p>
-          </Link>
-
-          <Link
-            href="/dependent-work-limit"
-            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
-          >
-            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
-              パート向け
-            </div>
-            <div className="font-bold">扶養内勤務シミュレーター</div>
-            <p className="mt-2 text-sm leading-6 text-gray-600">
-              扶養範囲内で働ける月の時間や1日あたりの時間を逆算できます。
+              月の収入と支出から残るお金を概算できます。
             </p>
           </Link>
         </div>
@@ -210,7 +170,7 @@ export default function Home() {
             <div className="mb-4 flex items-center justify-between gap-3">
               <h3 className="text-lg font-bold">生活費・買い物</h3>
               <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
-                一部公開
+                公開中
               </span>
             </div>
 
@@ -225,12 +185,15 @@ export default function Home() {
                 </p>
               </Link>
 
-              <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
-                <div className="font-bold text-gray-500">月の出費計算機</div>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  家賃・食費・固定費などから月の支出を整理できるツールを追加予定です。
+              <Link
+                href="/monthly-expense"
+                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-blue-50"
+              >
+                <div className="font-bold">月の出費計算機</div>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  月の収入と支出から残るお金を概算できます。
                 </p>
-              </div>
+              </Link>
             </div>
           </section>
         </div>
