@@ -79,6 +79,19 @@ export default function Home() {
           </Link>
 
           <Link
+            href="/consumption-tax"
+            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
+          >
+            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
+              生活費・買い物
+            </div>
+            <div className="font-bold">消費税計算機</div>
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              税込・税抜価格と消費税額をかんたんに計算できます。
+            </p>
+          </Link>
+
+          <Link
             href="/hourly-to-monthly"
             className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
           >
@@ -196,18 +209,21 @@ export default function Home() {
           <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3">
               <h3 className="text-lg font-bold">生活費・買い物</h3>
-              <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-500">
-                追加予定
+              <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
+                一部公開
               </span>
             </div>
 
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
-                <div className="font-bold text-gray-500">消費税計算機</div>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  税込・税抜価格をかんたんに計算できるツールを追加予定です。
+              <Link
+                href="/consumption-tax"
+                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-blue-50"
+              >
+                <div className="font-bold">消費税計算機</div>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  税込・税抜価格と消費税額をかんたんに計算できます。
                 </p>
-              </div>
+              </Link>
 
               <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
                 <div className="font-bold text-gray-500">月の出費計算機</div>
