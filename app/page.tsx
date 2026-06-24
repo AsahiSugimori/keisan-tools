@@ -24,7 +24,7 @@ export default function Home() {
       <section className="mb-8">
         <h2 className="mb-4 text-2xl font-bold">よく使う計算ツール</h2>
 
-        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-5">
           <Link
             href="/take-home-pay"
             className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
@@ -49,6 +49,19 @@ export default function Home() {
             <div className="font-bold">賞与→手取り計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
               ボーナスから社会保険料・所得税を差し引いた手取り額を概算できます。
+            </p>
+          </Link>
+
+          <Link
+            href="/withholding-tax"
+            className="block rounded-xl border border-blue-100 bg-white p-4 shadow-sm transition hover:bg-blue-50"
+          >
+            <div className="mb-2 inline-block rounded-full bg-blue-100 px-2 py-1 text-xs font-bold text-blue-700">
+              フリーランス向け
+            </div>
+            <div className="font-bold">源泉徴収計算機</div>
+            <p className="mt-2 text-sm leading-6 text-gray-600">
+              報酬額から源泉徴収税額と差引入金額を概算できます。
             </p>
           </Link>
 
@@ -139,8 +152,8 @@ export default function Home() {
           <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3">
               <h3 className="text-lg font-bold">フリーランス向け</h3>
-              <span className="rounded-full bg-gray-100 px-2 py-1 text-xs font-bold text-gray-500">
-                追加予定
+              <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
+                一部公開
               </span>
             </div>
 
@@ -154,12 +167,15 @@ export default function Home() {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-dashed border-gray-300 bg-gray-50 p-4">
-                <div className="font-bold text-gray-500">源泉徴収計算機</div>
-                <p className="mt-2 text-sm leading-6 text-gray-500">
-                  請求額や源泉徴収後の入金額を確認できるツールを追加予定です。
+              <Link
+                href="/withholding-tax"
+                className="block rounded-xl border border-gray-200 bg-gray-50 p-4 transition hover:bg-blue-50"
+              >
+                <div className="font-bold">源泉徴収計算機</div>
+                <p className="mt-2 text-sm leading-6 text-gray-600">
+                  報酬額から源泉徴収税額と差引入金額を概算できます。
                 </p>
-              </div>
+              </Link>
             </div>
           </section>
 
