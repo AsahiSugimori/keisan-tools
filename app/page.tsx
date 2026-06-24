@@ -16,7 +16,7 @@ export default function Home() {
         </p>
         <h1 className="mb-3 text-4xl font-bold">ヨサンメモ</h1>
         <p className="max-w-2xl leading-7 text-gray-700">
-          手取り、時給、扶養内勤務、生活費などの計算をかんたんに確認できるサイトです。
+          手取り、時給、扶養内勤務、生活費などの計算をかんたんに確認できるサイトです。<br/>
           面倒なお金の計算を、サクッと見える化できます。
         </p>
       </section>

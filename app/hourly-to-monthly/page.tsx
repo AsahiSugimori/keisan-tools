@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import HourlyToMonthlyCalculator
-  from "../../components/HourlyToMonthlyCalculator";
+import BackLink from "../../components/BackLink";
+import HourlyToMonthlyCalculator from "../../components/HourlyToMonthlyCalculator";
 
 export const metadata: Metadata = {
   title: "ヨサンメモ（時給→月給計算機）",
@@ -9,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <HourlyToMonthlyCalculator />;
+  return (
+    <>
+      <div className="mx-auto max-w-3xl px-4 pt-4">
+        <BackLink />
+      </div>
+      <HourlyToMonthlyCalculator />
+    </>
+  );
 }

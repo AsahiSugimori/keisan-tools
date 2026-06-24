@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import BackLink from "../../components/BackLink";
 import DependentWorkLimitCalculator from "../../components/DependentWorkLimitCalculator";
 
 export const metadata: Metadata = {
@@ -8,5 +9,12 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <DependentWorkLimitCalculator />;
+  return (
+    <>
+      <div className="mx-auto max-w-3xl px-4 pt-4">
+        <BackLink />
+      </div>
+      <DependentWorkLimitCalculator />
+    </>
+  );
 }

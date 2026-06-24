@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import TakeHomePayCalculator
-  from "../../components/TakeHomePayCalculator";
+import BackLink from "../../components/BackLink";
+import TakeHomePayCalculator from "../../components/TakeHomePayCalculator";
 
 export const metadata: Metadata = {
   title: "ヨサンメモ（額面→手取り計算機）",
@@ -9,5 +9,13 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <TakeHomePayCalculator />;
+
+  return (
+    <>
+      <div className="mx-auto max-w-3xl px-4 pt-4">
+        <BackLink />
+      </div>
+      <TakeHomePayCalculator />
+    </>
+  );
 }
