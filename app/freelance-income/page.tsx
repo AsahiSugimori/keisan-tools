@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackLink from "../../components/BackLink";
+import RelatedTools from "../../components/RelatedTools";
 import FreelanceIncomeCalculator from "../../components/FreelanceIncomeCalculator";
 
 export const metadata: Metadata = {
@@ -15,6 +16,20 @@ export default function Page() {
         <BackLink />
       </div>
       <FreelanceIncomeCalculator />
+      <RelatedTools
+        tools={[
+          {
+            href: "/withholding-tax",
+            title: "源泉徴収計算機",
+            description: "報酬額から源泉徴収税額と差引入金額を概算できます。",
+          },
+          {
+            href: "/consumption-tax",
+            title: "消費税計算機",
+            description: "税込・税抜価格と消費税額を計算できます。",
+          },
+        ]}
+      />
     </>
   );
 }

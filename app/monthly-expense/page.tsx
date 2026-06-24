@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackLink from "../../components/BackLink";
+import RelatedTools from "../../components/RelatedTools";
 import MonthlyExpenseCalculator from "../../components/MonthlyExpenseCalculator";
 
 export const metadata: Metadata = {
@@ -15,6 +16,20 @@ export default function Page() {
         <BackLink />
       </div>
       <MonthlyExpenseCalculator />
+      <RelatedTools
+        tools={[
+          {
+            href: "/take-home-pay",
+            title: "額面→手取り計算機",
+            description: "月の手取り額を概算できます。",
+          },
+          {
+            href: "/bonus-take-home-pay",
+            title: "賞与→手取り計算機",
+            description: "ボーナスの手取り額を概算できます。",
+          },
+        ]}
+      />
     </>
   );
 }

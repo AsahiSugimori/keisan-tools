@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import BackLink from "../../components/BackLink";
+import RelatedTools from "../../components/RelatedTools";
 import ConsumptionTaxCalculator from "../../components/ConsumptionTaxCalculator";
 
 export const metadata: Metadata = {
@@ -15,6 +16,20 @@ export default function Page() {
         <BackLink />
       </div>
       <ConsumptionTaxCalculator />
+      <RelatedTools
+        tools={[
+          {
+            href: "/withholding-tax",
+            title: "源泉徴収計算機",
+            description: "報酬額から源泉徴収税額と差引入金額を概算できます。",
+          },
+          {
+            href: "/monthly-expense",
+            title: "月の出費計算機",
+            description: "毎月の支出と残るお金を整理できます。",
+          },
+        ]}
+      />
     </>
   );
 }
