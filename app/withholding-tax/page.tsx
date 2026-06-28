@@ -15,7 +15,9 @@ export default function Page() {
       <div className="mx-auto max-w-3xl px-4 pt-4">
         <BackLink />
       </div>
+
       <WithholdingTaxCalculator />
+
       <RelatedTools
         tools={[
           {
@@ -26,7 +28,17 @@ export default function Page() {
           {
             href: "/consumption-tax",
             title: "消費税計算機",
-            description: "税込・税抜価格と消費税額を計算できます。",
+            description: "税込・税抜価格と消費税額をかんたんに計算できます。",
+          },
+          {
+            href: "/monthly-expense",
+            title: "月の出費計算機",
+            description: "月の収入と支出から、今月残りそうなお金を概算できます。",
+          },
+          {
+            href: "/take-home-pay",
+            title: "額面→手取り計算機",
+            description: "月給の額面から、おおよその手取り額を確認できます。",
           },
         ]}
       />
