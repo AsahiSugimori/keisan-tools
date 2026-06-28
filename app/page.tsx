@@ -4,7 +4,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "ヨサンメモ",
   description:
-    "手取り、時給、扶養内勤務、生活費など仕事や暮らしのお金をサクッと確認できる計算ツールサイトです。",
+    "手取り、賞与、時給、扶養内勤務、源泉徴収、生活費など仕事や暮らしのお金をサクッと確認できる計算ツールサイトです。",
 };
 
 export default function Home() {
@@ -16,13 +16,19 @@ export default function Home() {
         </p>
         <h1 className="mb-3 text-4xl font-bold">ヨサンメモ</h1>
         <p className="max-w-2xl leading-7 text-gray-700">
-          手取り、時給、扶養内勤務、生活費などの計算をかんたんに確認できるサイトです。<br/>
-          面倒なお金の計算を、サクッと見える化できます。
+          手取り、賞与、時給、扶養内勤務、源泉徴収、生活費などをかんたんに確認できる計算ツール集です。
+          <br />
+          毎月のお金や働き方に関する目安を、なるべくシンプルに見える化できます。
         </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="mb-4 text-2xl font-bold">よく使う計算ツール</h2>
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold">よく使う計算ツール</h2>
+          <p className="mt-2 text-sm leading-6 text-gray-600">
+            給与・賞与・税金・生活費など、使う場面が多い計算ツールをまとめています。
+          </p>
+        </div>
 
         <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           <Link
@@ -34,7 +40,7 @@ export default function Home() {
             </div>
             <div className="font-bold">額面→手取り計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              月給から社会保険料・税金を差し引いた手取り額を概算できます。
+              月給の額面から、社会保険料や税金を差し引いた手取り額を概算できます。
             </p>
           </Link>
 
@@ -47,7 +53,7 @@ export default function Home() {
             </div>
             <div className="font-bold">賞与→手取り計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              ボーナスから社会保険料・所得税を差し引いた手取り額を概算できます。
+              ボーナスの額面から、社会保険料・所得税を引いた手取り額を概算できます。
             </p>
           </Link>
 
@@ -60,7 +66,7 @@ export default function Home() {
             </div>
             <div className="font-bold">源泉徴収計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              報酬額から源泉徴収税額と差引入金額を概算できます。
+              報酬額から源泉徴収税額と、差し引き後の入金額を概算できます。
             </p>
           </Link>
 
@@ -73,20 +79,30 @@ export default function Home() {
             </div>
             <div className="font-bold">月の出費計算機</div>
             <p className="mt-2 text-sm leading-6 text-gray-600">
-              月の収入と支出から残るお金を概算できます。
+              月の収入と支出を入力して、今月残りそうなお金を概算できます。
             </p>
           </Link>
         </div>
       </section>
 
       <section>
-        <h2 className="mb-4 text-2xl font-bold">カテゴリから探す</h2>
+        <div className="mb-4">
+          <h2 className="text-2xl font-bold">カテゴリから探す</h2>
+          <p className="mt-2 text-sm leading-6 text-gray-600">
+            給与、フリーランス、生活費など、知りたい内容に合わせて計算ツールを選べます。
+          </p>
+        </div>
 
         <div className="grid gap-6">
           <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h3 className="text-lg font-bold">給与・働き方</h3>
-              <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
+              <div>
+                <h3 className="text-lg font-bold">給与・働き方</h3>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  給与、賞与、時給、扶養内勤務などの目安を確認できます。
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
                 公開中
               </span>
             </div>
@@ -98,10 +114,9 @@ export default function Home() {
               >
                 <div className="font-bold">額面→手取り計算機</div>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  月給から手取り額を概算できます。
+                  月給の額面から手取り額を概算できます。
                 </p>
               </Link>
-
 
               <Link
                 href="/bonus-take-home-pay"
@@ -119,7 +134,7 @@ export default function Home() {
               >
                 <div className="font-bold">時給→月給計算機</div>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  時給から月収・年収を計算できます。
+                  時給、勤務時間、勤務日数から月収・年収を計算できます。
                 </p>
               </Link>
 
@@ -129,7 +144,7 @@ export default function Home() {
               >
                 <div className="font-bold">扶養内勤務シミュレーター</div>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  扶養内で働ける時間を逆算できます。
+                  扶養内で働ける時間や、月に働ける目安を逆算できます。
                 </p>
               </Link>
             </div>
@@ -137,8 +152,13 @@ export default function Home() {
 
           <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h3 className="text-lg font-bold">フリーランス向け</h3>
-              <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
+              <div>
+                <h3 className="text-lg font-bold">フリーランス向け</h3>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  報酬、経費、源泉徴収など、個人で働く人向けの計算ツールです。
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
                 公開中
               </span>
             </div>
@@ -168,8 +188,13 @@ export default function Home() {
 
           <section className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h3 className="text-lg font-bold">生活費・買い物</h3>
-              <span className="rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
+              <div>
+                <h3 className="text-lg font-bold">生活費・買い物</h3>
+                <p className="mt-1 text-sm leading-6 text-gray-600">
+                  日々の買い物、消費税、毎月の出費などを確認できます。
+                </p>
+              </div>
+              <span className="shrink-0 rounded-full bg-green-100 px-2 py-1 text-xs font-bold text-green-700">
                 公開中
               </span>
             </div>
@@ -191,7 +216,7 @@ export default function Home() {
               >
                 <div className="font-bold">月の出費計算機</div>
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  月の収入と支出から残るお金を概算できます。
+                  月の収入と支出から、今月残りそうなお金を概算できます。
                 </p>
               </Link>
             </div>
@@ -206,10 +231,13 @@ export default function Home() {
             ヨサンメモは、仕事や暮らしのお金に関する計算を手軽に確認できる計算ツールサイトです。
           </p>
           <p>
-            手取り、時給、扶養内勤務など、日常で気になる金額をなるべくシンプルに確認できるようにしています。
+            給与の手取り、賞与の手取り、時給からの月収、扶養内で働ける時間、源泉徴収、生活費など、日常で気になる金額をなるべくシンプルに確認できるようにしています。
           </p>
           <p>
-            計算結果は目安です。税金、社会保険、扶養の判定などは条件によって変わるため、正確な判断が必要な場合は勤務先や専門窓口に確認してください。
+            家計簿や税務ソフトのように細かく管理する前に、「ざっくりどのくらいになるか」を確認したい場面で使いやすいサイトを目指しています。
+          </p>
+          <p>
+            計算結果は目安です。税金、社会保険、扶養の判定、源泉徴収の扱いなどは条件によって変わるため、正確な判断が必要な場合は勤務先や専門窓口に確認してください。
           </p>
         </div>
       </section>
