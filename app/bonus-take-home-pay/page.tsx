@@ -15,18 +15,30 @@ export default function Page() {
       <div className="mx-auto max-w-3xl px-4 pt-4">
         <BackLink />
       </div>
+
       <BonusTakeHomePayCalculator />
+
       <RelatedTools
         tools={[
           {
             href: "/take-home-pay",
             title: "額面→手取り計算機",
-            description: "月給から社会保険料・税金を差し引いた手取り額を概算できます。",
+            description: "月給の額面から、おおよその手取り額を確認できます。",
           },
           {
             href: "/monthly-expense",
             title: "月の出費計算機",
-            description: "毎月の支出と残るお金を整理できます。",
+            description: "月の収入と支出から、今月残りそうなお金を概算できます。",
+          },
+          {
+            href: "/withholding-tax",
+            title: "源泉徴収計算機",
+            description: "報酬額から源泉徴収税額と差し引き後の入金額を概算できます。",
+          },
+          {
+            href: "/hourly-to-monthly",
+            title: "時給→月給計算機",
+            description: "時給、勤務時間、勤務日数から月収や年収を計算できます。",
           },
         ]}
       />

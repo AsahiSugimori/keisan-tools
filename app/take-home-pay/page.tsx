@@ -10,24 +10,35 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-
   return (
     <>
       <div className="mx-auto max-w-3xl px-4 pt-4">
         <BackLink />
       </div>
+
       <TakeHomePayCalculator />
+
       <RelatedTools
         tools={[
           {
             href: "/bonus-take-home-pay",
             title: "賞与→手取り計算機",
-            description: "ボーナス額面から手取り額を概算できます。",
+            description: "ボーナス額面から、おおよその手取り額を確認できます。",
           },
           {
             href: "/monthly-expense",
             title: "月の出費計算機",
-            description: "毎月の支出と残るお金を整理できます。",
+            description: "月の収入と支出から、今月残りそうなお金を概算できます。",
+          },
+          {
+            href: "/hourly-to-monthly",
+            title: "時給→月給計算機",
+            description: "時給、勤務時間、勤務日数から月収や年収を計算できます。",
+          },
+          {
+            href: "/dependent-work-limit",
+            title: "扶養内勤務シミュレーター",
+            description: "扶養内で働ける時間や、月の勤務時間の目安を逆算できます。",
           },
         ]}
       />
