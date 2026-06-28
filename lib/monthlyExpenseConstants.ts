@@ -65,7 +65,7 @@ export const monthlyExpenseGroups: MonthlyExpenseGroupDefinition[] = [
   {
     id: "income",
     title: "収入・調整",
-    description: "月の手取り、先月繰り越し、臨時収入などを入力します。",
+    description: "月の手取り、先月繰り越し、臨時収入などを入力",
     items: [
       { id: "monthlyTakeHomePay", label: "月の手取り", defaultValue: 250000 },
       { id: "carryOver", label: "先月繰り越し", defaultValue: 0 },
@@ -75,7 +75,7 @@ export const monthlyExpenseGroups: MonthlyExpenseGroupDefinition[] = [
   {
     id: "fixed",
     title: "固定費",
-    description: "毎月ほぼ決まって発生する支出を入力します。",
+    description: "毎月ほぼ決まって発生する支出を入力",
     items: [
       { id: "rent", label: "家賃", defaultValue: 0 },
       { id: "loan", label: "ローン", defaultValue: 0 },
@@ -89,7 +89,7 @@ export const monthlyExpenseGroups: MonthlyExpenseGroupDefinition[] = [
   {
     id: "variable",
     title: "変動費",
-    description: "食費、買い物、趣味など月によって変わりやすい支出を入力します。",
+    description: "食費、外食、買い物、趣味など月によって変わりやすい支出を入力",
     items: [
       { id: "food", label: "食費", defaultValue: 0 },
       { id: "eatingOut", label: "外食", defaultValue: 0 },
@@ -103,10 +103,11 @@ export const monthlyExpenseGroups: MonthlyExpenseGroupDefinition[] = [
   {
     id: "cardLoan",
     title: "カード/分割",
-    description: "クレカ支払い、分割払い、ローン支払いをまとめて入力します。",
+    description: "クレカ支払い、分割払い、ローン支払いをまとめて入力",
     items: [
       { id: "creditCardPayment", label: "クレカ支払い", defaultValue: 0 },
       { id: "installmentPayment", label: "分割/ローン支払い", defaultValue: 0 },
+      { id: "otherCardLoan", label: "その他カード/分割", defaultValue: 0 },
     ],
   },
 ];
