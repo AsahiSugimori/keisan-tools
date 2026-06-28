@@ -15,18 +15,30 @@ export default function Page() {
       <div className="mx-auto max-w-4xl px-4 pt-4">
         <BackLink />
       </div>
+
       <MonthlyExpenseCalculator />
+
       <RelatedTools
         tools={[
           {
             href: "/take-home-pay",
             title: "額面→手取り計算機",
-            description: "月の手取り額を概算できます。",
+            description: "月給の額面から、おおよその手取り額を確認できます。",
           },
           {
             href: "/bonus-take-home-pay",
             title: "賞与→手取り計算機",
-            description: "ボーナスの手取り額を概算できます。",
+            description: "ボーナスの額面から、おおよその手取り額を確認できます。",
+          },
+          {
+            href: "/hourly-to-monthly",
+            title: "時給→月給計算機",
+            description: "時給、勤務時間、勤務日数から月収や年収を計算できます。",
+          },
+          {
+            href: "/consumption-tax",
+            title: "消費税計算機",
+            description: "税込・税抜価格と消費税額をかんたんに計算できます。",
           },
         ]}
       />
