@@ -37,6 +37,10 @@ function floorMoney(value: number): number {
   return Math.max(minMoneyValue, Math.floor(value));
 }
 
+function floorSignedMoney(value: number): number {
+  return Math.floor(value);
+}
+
 function calculateFreelanceIncome(
   monthlySales: number,
   monthlyExpenses: number,
@@ -60,10 +64,10 @@ function calculateFreelanceIncome(
   return {
     monthlySales: floorMoney(monthlySales),
     monthlyExpenses: floorMoney(monthlyExpenses),
-    monthlyProfit: floorMoney(monthlyProfit),
+    monthlyProfit: floorSignedMoney(monthlyProfit),
     yearlySales: floorMoney(yearlySales),
     yearlyExpenses: floorMoney(yearlyExpenses),
-    yearlyProfit: floorMoney(yearlyProfit),
+    yearlyProfit: floorSignedMoney(yearlyProfit),
     monthlyConsumptionTax,
     monthlyInvoiceAmountWithTax: floorMoney(monthlyInvoiceAmountWithTax),
     yearlyInvoiceAmountWithTax: floorMoney(yearlyInvoiceAmountWithTax),
@@ -235,7 +239,13 @@ export default function FreelanceIncomeCalculator() {
 
             <div className="mt-6 rounded-lg bg-blue-50 p-4 text-center">
               <div className="text-sm text-gray-600">月の利益目安</div>
-              <div className="mt-2 text-3xl font-bold">{result.monthlyProfit.toLocaleString()}円</div>
+              <div
+                className={`mt-2 text-3xl font-bold ${
+                  result.monthlyProfit < 0 ? "text-red-600" : "text-gray-900"
+                }`}
+              >
+                {result.monthlyProfit.toLocaleString()}円
+              </div>
             </div>
 
             <div className="mt-4 flex justify-between">
@@ -250,7 +260,9 @@ export default function FreelanceIncomeCalculator() {
 
             <div className="flex justify-between font-bold">
               <span>年間利益目安</span>
-              <span>{result.yearlyProfit.toLocaleString()}円</span>
+              <span className={result.yearlyProfit < 0 ? "text-red-600" : "text-gray-900"}>
+                {result.yearlyProfit.toLocaleString()}円
+              </span>
             </div>
 
             {includeConsumptionTax && (
@@ -258,7 +270,7 @@ export default function FreelanceIncomeCalculator() {
                 <hr />
 
                 <div className="flex justify-between">
-                  <span>月の消費税目安</span>
+                  <span>請求時の消費税目安</span>
                   <span>{result.monthlyConsumptionTax.toLocaleString()}円</span>
                 </div>
 
