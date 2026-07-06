@@ -616,7 +616,7 @@ export default function DependentWorkLimitCalculator() {
 
           <details className="rounded-lg border border-gray-200 bg-white p-4">
             <summary className="cursor-pointer font-bold text-gray-900">
-              103万円・106万円・130万円・150万円・160万円の違い
+              103万円・106万円・123万円・130万円・150万円・160万円の違い
             </summary>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full min-w-[620px] border-collapse text-left text-sm">
@@ -630,16 +630,23 @@ export default function DependentWorkLimitCalculator() {
                 <tbody>
                   <tr className="border-b">
                     <td className="px-3 py-2">103万円</td>
-                    <td className="px-3 py-2">よく使われる扶養の目安</td>
+                    <td className="px-3 py-2">以前からよく使われる扶養の目安</td>
                     <td className="px-3 py-2">
-                      税制改正や家族構成によって実際の影響は変わります。
+                      税制改正後は、税金面の目安としては123万円や160万円もあわせて確認が必要です。
                     </td>
                   </tr>
                   <tr className="border-b">
                     <td className="px-3 py-2">106万円</td>
-                    <td className="px-3 py-2">社会保険加入の目安</td>
+                    <td className="px-3 py-2">社会保険加入の旧目安</td>
                     <td className="px-3 py-2">
-                      勤務先の規模や週の労働時間など、収入以外の条件も関係します。
+                      週20時間以上などの条件が関係します。今後は制度改正により、金額要件の扱いが変わる予定です。
+                    </td>
+                  </tr>
+                  <tr className="border-b">
+                    <td className="px-3 py-2">123万円</td>
+                    <td className="px-3 py-2">税制改正後の扶養目安</td>
+                    <td className="px-3 py-2">
+                      扶養控除など税金面の目安として確認される金額です。社会保険の扶養判定とは別に考える必要があります。
                     </td>
                   </tr>
                   <tr className="border-b">
@@ -651,16 +658,16 @@ export default function DependentWorkLimitCalculator() {
                   </tr>
                   <tr className="border-b">
                     <td className="px-3 py-2">150万円</td>
-                    <td className="px-3 py-2">配偶者特別控除の目安</td>
+                    <td className="px-3 py-2">配偶者特別控除などの目安</td>
                     <td className="px-3 py-2">
-                      配偶者の所得や制度改正によって控除額は変わります。
+                      配偶者の所得や家族構成によって、実際の控除額は変わります。
                     </td>
                   </tr>
                   <tr>
                     <td className="px-3 py-2">160万円</td>
-                    <td className="px-3 py-2">税制改正後の目安</td>
+                    <td className="px-3 py-2">所得税がかかり始める目安</td>
                     <td className="px-3 py-2">
-                      今後の制度変更や個別条件に注意が必要です。
+                      令和7年度税制改正後の目安です。住民税や社会保険の判定とは別に確認してください。
                     </td>
                   </tr>
                 </tbody>
@@ -739,6 +746,9 @@ export default function DependentWorkLimitCalculator() {
             </summary>
             <div className="mt-3 space-y-2">
               <p>この計算結果は目安です。</p>
+              <p>
+                税金の扶養、社会保険の扶養、本人に税金がかかるラインはそれぞれ別の制度なので、同じ「年収の壁」でも意味が異なります。
+              </p>
               <p>
                 扶養や社会保険の判定は、年齢、学生かどうか、勤務先の従業員数、週の所定労働時間、月額賃金、交通費の扱い、配偶者・親の扶養かどうかによって変わります。
               </p>

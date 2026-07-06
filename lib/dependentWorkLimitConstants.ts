@@ -95,17 +95,17 @@ export const minValue = 0;
 export const annualLimitOptions: AnnualLimitOption[] = [
   {
     type: "limit103",
-    label: "103万円（よく使われる扶養目安）",
+    label: "103万円（以前から使われる扶養目安）",
     amount: 1030000,
   },
   {
     type: "limit106",
-    label: "106万円（社会保険の壁の目安）",
+    label: "106万円（社会保険加入の旧目安）",
     amount: 1060000,
   },
   {
     type: "limit123",
-    label: "123万円（税制改正後の目安）",
+    label: "123万円（税制改正後の扶養目安）",
     amount: 1230000,
   },
   {
@@ -115,12 +115,12 @@ export const annualLimitOptions: AnnualLimitOption[] = [
   },
   {
     type: "limit150",
-    label: "150万円（配偶者特別控除の目安）",
+    label: "150万円（配偶者特別控除などの目安）",
     amount: 1500000,
   },
   {
     type: "limit160",
-    label: "160万円（税制改正後の目安）",
+    label: "160万円（所得税がかかり始める目安）",
     amount: 1600000,
   },
   {
